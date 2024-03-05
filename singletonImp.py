@@ -1,7 +1,7 @@
 class Singleton(object):
     _instances = {}
 
-    def __new__(cls, *args, **kwargs):
+    def __new__(cls, *args, **kwargs) -> object:
         if cls not in cls._instances:
             instance = super().__new__(cls)
             cls._instances[cls] = instance
