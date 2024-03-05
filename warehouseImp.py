@@ -15,7 +15,7 @@ class Warehouse(Inventory):
         available_space = self.capacity - used_space
         return available_space
 
-    def add_product(self, product) -> bool:
+    def add_product(self, product: Product) -> bool:
         if not self.utils.validate_product(product):
             print("Invalid product")
             return False
@@ -28,7 +28,7 @@ class Warehouse(Inventory):
         print(f"Added product to {self.location} warehouse.")
         return True
 
-    def remove_product(self, product) -> bool:
+    def remove_product(self, product: Product) -> bool:
         if self.utils.is_product_in_warehouse(product, self):
             self.products.remove(product)
             print(f"Removed product from {self.location} warehouse.")
@@ -38,15 +38,14 @@ class Warehouse(Inventory):
     def update_product_details(self, product_id, **kwargs) -> None:
         if not self.utils.is_product_in_warehouse(product_id, self):
             print("Product not found.")
-            return
+            return None
 
         for product in self.products:
             if product.id == product_id:
                 for key, value in kwargs.items():
                     setattr(product, key, value)
-                break
-        else:
-            print("Product not found.")
+                print("Product updated.")
+                return None
 
     def get_product_details(self, product_id) -> Product:
         if not self.utils.is_product_in_warehouse(product_id, self):
@@ -56,5 +55,3 @@ class Warehouse(Inventory):
         for product in self.products:
             if product.id == product_id:
                 return product
-        print("Product not found.")
-        return None

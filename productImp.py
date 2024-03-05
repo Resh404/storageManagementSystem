@@ -6,6 +6,7 @@ class Product:
         self.quantity = quantity
         self.category = category
 
+    # setters and getters for the parameters of the class
     @property
     def item_id(self) -> int:
         return self.id
@@ -46,5 +47,6 @@ class Product:
     def item_category(self, new_category: str) -> None:
         self.category = new_category
 
+    # return a string representation and not just references
     def __str__(self):
         return f"ID: {self.id}, Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}, Category: {self.category}"
