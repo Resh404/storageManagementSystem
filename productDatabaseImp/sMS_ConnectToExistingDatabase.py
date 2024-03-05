@@ -1,4 +1,4 @@
-from singletonImp import Singleton
+from sMS_singleton_implementation import Singleton
 import mysql.connector
 
 

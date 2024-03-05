@@ -1,10 +1,10 @@
-from inventoryImp import Inventory
-from productImp import Product
-from warehouseUtils import WarehouseUtils
+from sMS_product_inventory_implementation import Inventory
+from productCreationImp import Product
+from productUtilsImp.product_warehouse_utils_implementation import WarehouseUtils
 
 
 class Warehouse(Inventory):
-    def __init__(self, location, capacity, utils: WarehouseUtils):
+    def __init__(self, location: str, capacity: int, utils: WarehouseUtils):
         super().__init__()
         self.location = location
         self.capacity = capacity

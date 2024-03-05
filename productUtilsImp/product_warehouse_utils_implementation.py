@@ -1,5 +1,5 @@
-from productImp import Product
-from warehouseImp import Warehouse
+from productCreationImp import Product
+from sMS_product_warehouse_implementation import Warehouse
 
 
 # Utils methods for the storage management system. Can be expanded

@@ -1,15 +1,14 @@
 from typing import List
-from productImp import Product
-from warehouseImp import Warehouse
+from productCreationImp import Product
+from productStorageImp.sMS_product_warehouse_implementation import Warehouse
 
 
 class Order:
     _reserved_products_list = []
 
-    def __init__(self, id: int, products: List['Product'], status: str):
+    def __init__(self, id: int, products: List['Product']):
         self.id = id
         self.products = products
-        self.status = status
 
     def add_reserved_product(self, product: Product):
         self._reserved_products_list.append(product)

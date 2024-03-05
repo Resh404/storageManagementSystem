@@ -1,4 +1,4 @@
-from productImp import Product
+from productCreationImp import Product
 
 
 class Inventory:

@@ -1,6 +1,6 @@
-from ConnectToExistingDatabase import ConnectToDatabase
-from inventoryImp import Inventory
-from productImp import Product
+from productDatabaseImp.sMS_ConnectToExistingDatabase import ConnectToDatabase
+from productStorageImp.sMS_product_inventory_implementation import Inventory
+from productCreationImp.sMS_product_implementation import Product
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

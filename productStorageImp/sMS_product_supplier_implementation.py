@@ -1,6 +1,6 @@
-from productImp import Product
+from productCreationImp import Product
 from typing import List
-from warehouseImp import Warehouse
+from sMS_product_warehouse_implementation import Warehouse
 
 
 class Supplier:
