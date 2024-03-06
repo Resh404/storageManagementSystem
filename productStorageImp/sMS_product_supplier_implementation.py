@@ -1,7 +1,7 @@
 from productCreationImp.sMS_product_implementation import Product
-from typing import List
 from productUtilsImp.sMS_Iproduct_handler_implementation import ProductHandler
-from sMS_product_warehouse_implementation import Warehouse
+from productStorageImp.sMS_product_warehouse_implementation import Warehouse
+from typing import List
 
 
 class Supplier(ProductHandler):

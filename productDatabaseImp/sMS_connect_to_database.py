@@ -45,26 +45,3 @@ class ConnectToDatabase(Singleton):
         except Exception as e:
             print(f"Error connecting to the database: {e}")
             raise
-
-    def get_table_data(self, table_name, database_connection):
-        try:
-            # Connect to the database
-            my_database = database_connection
-            cursor = my_database.cursor()
-
-            # Select all data from the specified table
-            cursor.execute(f"SELECT * FROM {table_name}")
-
-            # Fetch data in batches
-            while True:
-                rows = cursor.fetchmany(100)
-                if not rows:
-                    break
-                yield rows
-        except mysql.connector.Error as e:
-            print(f"Error fetching data from table: {e}")
-            return None
-        finally:
-            # Close cursor and database connection
-            cursor.close()
-            my_database.close()

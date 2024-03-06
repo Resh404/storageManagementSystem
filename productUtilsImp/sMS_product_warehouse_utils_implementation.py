@@ -1,5 +1,4 @@
 from productCreationImp.sMS_product_implementation import Product
-from productStorageImp.sMS_product_warehouse_implementation import Warehouse
 
 
 # Utils methods for the storage management system. Can be expanded
@@ -17,7 +16,7 @@ class WarehouseUtils:
         return True
 
     @staticmethod
-    def is_product_in_warehouse(product: Product, warehouse: Warehouse) -> bool:
+    def is_product_in_warehouse(product: Product, warehouse) -> bool:
         for item in warehouse.products:
             if item.id == product.id:
                 return True

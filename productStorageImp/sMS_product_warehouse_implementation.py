@@ -1,14 +1,14 @@
-from sMS_product_inventory_implementation import Inventory
 from productCreationImp.sMS_product_implementation import Product
+from productStorageImp.sMS_product_inventory_implementation import Inventory
 from productUtilsImp.sMS_product_warehouse_utils_implementation import WarehouseUtils
 
 
 class Warehouse(Inventory):
-    def __init__(self, location: str, capacity: int, utils: WarehouseUtils):
+    def __init__(self, location: str, capacity: int):
         super().__init__()
         self.location = location
         self.capacity = capacity
-        self.utils = utils
+        self.utils = WarehouseUtils
 
     def return_available_space(self) -> int:
         used_space = sum(product.quantity for product in self.products)
