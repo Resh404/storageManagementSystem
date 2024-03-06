@@ -1,11 +1,11 @@
 from typing import List
-from productCreationImp import Product
+from productCreationImp.sMS_product_implementation import Product
 from productStorageImp.sMS_product_inventory_implementation import Inventory
 from productStorageImp.sMS_product_warehouse_implementation import Warehouse
 from productStorageImp.sMS_product_supplier_implementation import Supplier
 from productSaleImp.sMS_order_implementation import Order
 from productSaleImp.sMS_customer_implementation import Customer
-from productUtilsImp.product_warehouse_utils_implementation import WarehouseUtils
+from productUtilsImp.sMS_product_warehouse_utils_implementation import WarehouseUtils
 
 
 class Factory:

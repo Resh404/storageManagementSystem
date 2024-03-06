@@ -1,8 +1,9 @@
 from typing import List
+from productUtilsImp.sMS_Iorder_handler_implementation import OrderHandler
 from sMS_order_implementation import Order
 
 
-class Customer:
+class Customer(OrderHandler):
     def __init__(self, id: int, name: str, orders_placed: List['Order']):
         self.id = id
         self.name = name

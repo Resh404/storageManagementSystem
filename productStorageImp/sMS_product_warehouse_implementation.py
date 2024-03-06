@@ -1,6 +1,6 @@
 from sMS_product_inventory_implementation import Inventory
-from productCreationImp import Product
-from productUtilsImp.product_warehouse_utils_implementation import WarehouseUtils
+from productCreationImp.sMS_product_implementation import Product
+from productUtilsImp.sMS_product_warehouse_utils_implementation import WarehouseUtils
 
 
 class Warehouse(Inventory):

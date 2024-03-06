@@ -1,7 +1,8 @@
-from productCreationImp import Product
+from productCreationImp.sMS_product_implementation import Product
+from productUtilsImp.sMS_Iproduct_handler_implementation import ProductHandler
 
 
-class Inventory:
+class Inventory(ProductHandler):
     def __init__(self):
         self.products = []
 

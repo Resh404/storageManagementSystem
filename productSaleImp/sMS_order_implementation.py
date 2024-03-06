@@ -1,9 +1,10 @@
 from typing import List
-from productCreationImp import Product
+from productCreationImp.sMS_product_implementation import Product
 from productStorageImp.sMS_product_warehouse_implementation import Warehouse
+from productUtilsImp.sMS_Iproduct_handler_implementation import ProductHandler
 
 
-class Order:
+class Order(ProductHandler):
     _reserved_products_list = []
 
     def __init__(self, id: int, products: List['Product']):

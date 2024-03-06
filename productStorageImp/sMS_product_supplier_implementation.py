@@ -1,9 +1,10 @@
-from productCreationImp import Product
+from productCreationImp.sMS_product_implementation import Product
 from typing import List
+from productUtilsImp.sMS_Iproduct_handler_implementation import ProductHandler
 from sMS_product_warehouse_implementation import Warehouse
 
 
-class Supplier:
+class Supplier(ProductHandler):
     def __init__(self, id: int, name: str, contact_details: str, products_supplied: List['Product']):
         self.id = id
         self.name = name
