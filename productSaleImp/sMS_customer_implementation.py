@@ -21,3 +21,7 @@ class Customer(OrderHandler):
 
     def cancel_order(self, order: Order) -> None:
         self.orders_placed.remove(order)
+
+    def print_orders_placed(self):
+        for order in self.orders_placed:
+            print(str(order))

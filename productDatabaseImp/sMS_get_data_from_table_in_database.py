@@ -4,7 +4,8 @@ import mysql.connector
 
 
 class TableDataFletcher:
-    def get_table_data(self, table_name: str, database_connector: mysql.connector.connection.MySQLConnection) -> List['Product']:
+    def get_table_data(self, table_name: str, database_connector: mysql.connector.connection.MySQLConnection) \
+            -> List['Product']:
         try:
             # Connect to the database
             my_database = database_connector
@@ -15,7 +16,7 @@ class TableDataFletcher:
 
             # Fetch data in batches
             while True:
-                rows = cursor.fetchmany(100)
+                rows = cursor.fetchmany(5)
                 if not rows:
                     break
                 yield rows
