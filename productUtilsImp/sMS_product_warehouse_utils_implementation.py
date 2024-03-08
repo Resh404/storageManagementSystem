@@ -16,8 +16,15 @@ class WarehouseUtils:
         return True
 
     @staticmethod
-    def is_product_in_warehouse(product: Product, warehouse) -> bool:
-        for item in warehouse.products:
-            if item.id == product.id:
-                return True
-        return False
+    def look_up_product_in_warehouse_by_id(product_id_look_up: int, warehouse) -> Product:
+        for product in warehouse.products:
+            if product.id == product_id_look_up:
+                return product
+        return None
+
+    @staticmethod
+    def look_up_product_in_warehouse_by_name(product_name_look_up: str, warehouse) -> Product:
+        for product in warehouse.products:
+            if product.name.lower() == product_name_look_up.lower():
+                return product
+        return None

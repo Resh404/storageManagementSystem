@@ -39,9 +39,9 @@ class Factory:
         return Supplier(id, name, contact_details, products_supplied)
 
     @staticmethod
-    def create_order(id: int, products: List[Product]) -> Order:
-        return Order(id, products)
+    def create_order(id, product_names: List['str'], product_quantities: List[int], warehouse: Warehouse) -> Order:
+        return Order(id, product_names, product_quantities, warehouse)
 
     @staticmethod
-    def create_customer(id: int, name: str, orders_placed: List[Order]) -> Customer:
+    def create_customer(id: int, name: str, orders_placed: Order) -> Customer:
         return Customer(id, name, orders_placed)

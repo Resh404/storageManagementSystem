@@ -46,29 +46,19 @@ if __name__ == '__main__':
 
         customers_processed += 1
 
-        # Gather product details for the order
+        # Create order (basket) so customer can shop from warehouse
         product_names = []
         quantities = []
+        customer_order = Factory.create_order(customers_processed, product_names, quantities, my_warehouse)
+
         while True:
             product_name = input("Enter the product name: ")
-            product_names.append(product_name)
             quantity = int(input("Enter the quantity: "))
-            quantities.append(quantity)
+            customer_order.add_product(product_name, quantity)
 
             more_products = input("Do you want to order more products? (y/n): ").lower()
             if more_products in ["n", "no"]:
                 break
-
-        # Create order and reserve products from the warehouse
-        sys.stdout = open(os.devnull, 'w')
-        my_orders = []
-        customer_order = Factory.create_order(customers_processed, my_orders)
-        customer_order.reserve_product_from_warehouse(product_names, quantities, my_warehouse)
-
-        # Add reserved products to the order
-        for product in customer_order.reserved_products_list:
-            customer_order.add_product(product)
-        sys.stdout = sys.__stdout__
 
         # Get customer details
         print("Please enter customer details:")
@@ -76,9 +66,10 @@ if __name__ == '__main__':
         customer_name = input("Enter customer name: ")
 
         # Create customer object and associate with orders
-        my_customer = Factory.create_customer(customer_id, customer_name, [customer_order])
+        my_customer = Factory.create_customer(customer_id, customer_name, customer_order)
+        my_customer.place_order()
 
         # Display customer's orders
-        print(f"Customer {my_customer.name} has placed the following orders: ")
+        print(f"Customer {my_customer.name}'s order consists of the following products: ")
         my_customer.print_orders_placed()
         sys.exit()

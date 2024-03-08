@@ -25,18 +25,16 @@ class Warehouse(Inventory):
             return False
 
         self.products.append(product)
-        print(f"Added product to {self.location} warehouse.")
         return True
 
     def remove_product(self, product: Product) -> bool:
-        if self.utils.is_product_in_warehouse(product, self):
+        if self.utils.look_up_product_in_warehouse_by_id(product.id, self) is not None:
             self.products.remove(product)
-            print(f"Removed product from {self.location} warehouse.")
             return True
         return False
 
     def update_product_details(self, product_id, **kwargs) -> None:
-        if not self.utils.is_product_in_warehouse(product_id, self):
+        if self.utils.look_up_product_in_warehouse_by_id(product_id, self) is None:
             print("Product not found.")
             return None
 
@@ -44,11 +42,10 @@ class Warehouse(Inventory):
             if product.id == product_id:
                 for key, value in kwargs.items():
                     setattr(product, key, value)
-                print("Product updated.")
                 return None
 
     def get_product_details(self, product_id) -> Product:
-        if not self.utils.is_product_in_warehouse(product_id, self):
+        if self.utils.look_up_product_in_warehouse_by_id(product_id, self) is None:
             print("Product not found.")
             return None
 

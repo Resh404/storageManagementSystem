@@ -11,14 +11,12 @@ class Inventory(ProductHandler):
             print("Invalid product")
             return
         self.products.append(product)
-        print("Product added.")
 
     def remove_product(self, product: Product) -> None:
         if product not in self.products:
             print("Product not found in the inventory.")
             return
         self.products.remove(product)
-        print("Product removed.")
 
     def update_product_details(self, product_id, **kwargs) -> None:
         found_product = False
@@ -27,7 +25,6 @@ class Inventory(ProductHandler):
                 found_product = True
                 for key, value in kwargs.items():
                     setattr(product, key, value)
-                    print("Product updated.")
                 break
         if not found_product:
             print("Product not found.")

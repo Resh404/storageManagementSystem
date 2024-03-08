@@ -27,3 +27,7 @@ class Supplier(ProductHandler):
 
         print(f"{i} products delivered to {warehouse.location} warehouse by {self.name}, "
               f"transaction id: {self.id}, contact details: {self.contact_details}")
+
+    def __str__(self):
+        product_list = ", ".join([product.name for product in self.products_supplied])
+        return f"Supplier ID: {self.id}, Name: {self.name}, Contact Details: {self.contact_details}, Products Supplied: {product_list}"

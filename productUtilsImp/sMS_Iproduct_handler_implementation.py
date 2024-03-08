@@ -4,9 +4,9 @@ from abc import ABC, abstractmethod
 
 class ProductHandler(ABC):
     @abstractmethod
-    def add_product(self, product: Product) -> None:
+    def add_product(self, *args, **kwargs) -> None:
         pass
 
     @abstractmethod
-    def remove_product(self, product: Product) -> None:
+    def remove_product(self, *args, **kwargs) -> None:
         pass
