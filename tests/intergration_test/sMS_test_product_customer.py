@@ -1,52 +1,63 @@
 from productCreationImp.sMS_product_implementation import Product
 from productSaleImp.sMS_customer_implementation import Customer
 from productSaleImp.sMS_order_implementation import Order
+from productStorageImp.sMS_product_warehouse_implementation import Warehouse
 import pytest
 
 
 # Set up fixtures
 @pytest.fixture
-def sample_order():
-    return Order(id=1,
-                 products=[
-                     Product(1, "Product 1", 10.0, 100, "Category A"),
-                     Product(2, "Product 2", 20.0, 50, "Category B"),
-                     Product(3, "Product 3", 30.0, 200, "Category A")
-                 ])
+def sample_warehouse():
+    warehouse = Warehouse(location="Sample Location", capacity=1000)
+    products = [
+        Product(id=1, name="Product 1", price=10.0, quantity=10, category="Category A"),
+        Product(id=2, name="Product 2", price=20.0, quantity=10, category="Category B"),
+        Product(id=3, name="Product 3", price=30.0, quantity=10, category="Category A")
+    ]
+    for product in products:
+        warehouse.add_product(product)
+    return warehouse
 
 
 @pytest.fixture
-def sample_customer(sample_order):
-    return Customer(id=1, name="Sample Customer", orders_placed=[sample_order])
+def sample_order(sample_warehouse):
+    return Order(id=1,
+                 product_names=[],
+                 product_quantities=[],
+                 warehouse=sample_warehouse)
+
+
+@pytest.fixture
+def sample_customer(sample_order, sample_warehouse):
+    for product in sample_warehouse.products:
+        sample_order.add_product(product.name, product.quantity)
+
+    return Customer(id=1, name="Sample Customer", orders_placed=sample_order)
 
 
 def test_calculate_total_cost(sample_order, sample_customer):
-    assert sample_customer.calculate_total_cost(sample_customer.orders_placed) == 60.0
+    assert sample_customer.calculate_total_cost() == 600
 
 
 def test_place_order(sample_order, sample_customer):
-    initial_order_count = len(sample_customer.orders_placed)
-    new_order = Order(id=2, products=[])
-    sample_customer.place_order(new_order)
-
-    assert len(sample_customer.orders_placed) == initial_order_count + 1
-    assert new_order in sample_customer.orders_placed
+    initial_order_count = len(sample_customer.orders_being_processed)
+    sample_customer.place_order()
+    assert len(sample_customer.orders_being_processed) == initial_order_count + 1
 
 
 def test_cancel_order(sample_order, sample_customer):
-    initial_order_count = len(sample_customer.orders_placed)
-    new_order = Order(id=2, products=[])
-    sample_customer.place_order(new_order)
+    sample_customer.place_order()
+    assert len(sample_customer.orders_being_processed) == 1
 
-    assert len(sample_customer.orders_placed) == initial_order_count + 1
-
-    sample_customer.cancel_order(new_order)
-
-    assert len(sample_customer.orders_placed) == initial_order_count
+    sample_customer.cancel_order(sample_customer.orders_being_processed[0])
+    assert len(sample_customer.orders_being_processed) == 0
 
 
 def test_print_orders_placed(capsys, sample_order, sample_customer):
+    sample_customer.place_order()
     sample_customer.print_orders_placed()
     captured = capsys.readouterr()
 
-    assert str(sample_order) in captured.out
+    assert "Product 1" in captured.out
+    assert "Product 2" in captured.out
+    assert "Product 3" in captured.out

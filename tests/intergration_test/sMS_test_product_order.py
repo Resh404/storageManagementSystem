@@ -23,27 +23,30 @@ def sample_warehouse(sample_product):
 
 
 @pytest.fixture
-def sample_order():
-    return Order(id=1, products=[])
+def sample_order(sample_warehouse):
+    return Order(id=1, product_names=[], product_quantities=[], warehouse=sample_warehouse)
 
 
 def test_add_product_to_order(sample_product, sample_order):
     product_to_add = sample_product[0]
-    sample_order.add_product(product_to_add)
+    sample_order.add_product(product_to_add.name, 5)
 
-    assert product_to_add in sample_order.products
+    assert product_to_add.name in sample_order.product_names
+    assert 5 in sample_order.product_quantities
 
 
 def test_remove_product_from_order(sample_product, sample_order):
     product_to_add = sample_product[0]
-    sample_order.add_product(product_to_add)
-    sample_order.remove_product(product_to_add)
+    sample_order.add_product(product_to_add.name, 5)
+    sample_order.remove_product(product_to_add.name)
 
-    assert product_to_add not in sample_order.products
+    assert product_to_add.name not in sample_order.product_names
+    assert 5 not in sample_order.product_quantities
 
 
 def test_reserve_products_from_warehouse(sample_product, sample_warehouse, sample_order):
     product_to_reserve = sample_product[0]
-    sample_order.reserve_product_from_warehouse([product_to_reserve.name], [5], sample_warehouse)
+    sample_order.add_product(product_to_reserve.name, 5)
+    sample_order.reserve_product_from_warehouse()
 
     assert len(sample_order.reserved_products_list) == 1

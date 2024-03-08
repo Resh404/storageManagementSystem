@@ -1,10 +1,10 @@
-import pytest
-import random
 from productCreationImp.sMS_product_implementation import Product
 from productDatabaseImp.sMS_get_data_from_table_in_database import TableDataFletcher
 from productDatabaseImp.sMS_connect_to_database import ConnectToDatabase
 from productStorageImp.sMS_product_warehouse_implementation import Warehouse
 from productDatabaseImp.sMS_data_for_database import product_data
+import pytest
+import random
 
 
 @pytest.fixture

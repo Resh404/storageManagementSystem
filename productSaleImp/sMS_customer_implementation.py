@@ -1,6 +1,5 @@
 from productUtilsImp.sMS_Iorder_handler_implementation import OrderHandler
 from productSaleImp.sMS_order_implementation import Order
-from typing import List
 
 
 class Customer(OrderHandler):
