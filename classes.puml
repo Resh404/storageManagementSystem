@@ -1,0 +1,165 @@
+@startuml classes
+set namespaceSeparator none
+
+package "productCreationImp" {
+    class "Product" #FFCC00 {
+        category : str
+        id : int
+        item_category
+        item_id
+        item_name
+        item_price
+        item_quantity
+        name : str
+        price : float
+        quantity : int
+    }
+}
+
+package "productDatabaseImp" {
+        class "ConnectToDatabase" #339933 {
+            host_name : str
+            password : str
+            port : int
+            user_name : str
+            connect_to_database(database_name: str) -> mysql.connector.connection.MySQLConnection
+        }
+
+        class "CreateStorageDatabase" #3366CC {
+            create_database(database_name: str, product_data: List[Tuple], server_connector: ConnectToDatabase) -> None
+        }
+
+        class "TableDataFletcher" #9966CC {
+            get_table_data(table_name: str, database_connector: mysql.connector.connection.MySQLConnection) -> List['Product']
+        }
+
+        class "ProductData" #663399 {
+            product_data : List[Tuple]
+        }
+    }
+
+package "productSaleImp" {
+    class "Order" #CCCC00 {
+        id : int
+        product_names : List['str']
+        product_quantities : List[int]
+        products : list
+        reserved_products_list : list
+        utils
+        warehouse
+        add_product(product_name: str, product_quantity: int) -> None
+        remove_product(product_name) -> None
+        reserve_product_from_warehouse() -> bool
+    }
+
+    class "Customer" #FF9933 {
+        id : int
+        name : str
+        orders_being_processed : list
+        orders_placed
+        calculate_total_cost() -> float
+        cancel_order(order: Order) -> None
+        place_order() -> None
+        print_orders_placed()
+    }
+}
+
+package "productStorageImp" {
+    class "Inventory" #6699FF {
+        products : list
+        add_product(product: Product) -> None
+        get_product_details(product_id) -> Product
+        remove_product(product: Product) -> None
+        update_product_details(product_id) -> None
+    }
+
+    class "Supplier" #33CC99 {
+        contact_details : str
+        id : int
+        name : str
+        products_supplied : List['Product']
+        add_product(product: Product) -> None
+        deliver_supplies(warehouse: Warehouse) -> None
+        remove_product(product: Product) -> None
+    }
+
+    class "Warehouse" #666699 {
+        capacity : int
+        location : str
+        utils
+        add_product(product: Product) -> bool
+        get_product_details(product_id) -> Product
+        remove_product(product: Product) -> bool
+        return_available_space() -> int
+        update_product_details(product_id) -> None
+    }
+}
+
+package "productUtilsImp" {
+    class "OrderHandler" #FF6666 {
+        {abstract}cancel_order()
+        {abstract}place_order()
+    }
+
+    class "ProductHandler" #CCCCFF {
+        {abstract}add_product() -> None
+        {abstract}remove_product() -> None
+    }
+
+    class "WarehouseUtils" #FFCC99 {
+        check_available_space(warehouse) -> bool
+        look_up_product_in_warehouse_by_id(product_id_look_up: int, warehouse) -> Product
+        look_up_product_in_warehouse_by_name(product_name_look_up: str, warehouse) -> Product
+        validate_product(product: Product) -> bool
+    }
+
+    class "Singleton" #66CC99 {
+    }
+
+    class "Factory" #FFCC00 {
+        create_connection_to_database(host_name: str, user_name: str, password: str, port: int) -> ConnectToDatabase
+        create_customer(id: int, name: str, orders_placed: Order) -> Customer
+        create_database_table_data_getter() -> TableDataFletcher
+        create_inventory() -> Inventory
+        create_new_storage_database() -> CreateStorageDatabase
+        create_order(id, product_names: List['str'], product_quantities: List[int], warehouse: Warehouse) -> Order
+        create_product(id: int, name: str, price: float, quantity: int, category: str) -> Product
+        create_supplier(id: int, name: str, contact_details: str, products_supplied: List[Product]) -> Supplier
+        create_warehouse(location: str, capacity: int) -> Warehouse
+    }
+}
+
+"Database" -[#339933]-> "DataAccess"
+
+"ConnectToDatabase" -[#339933]-> "CreateStorageDatabase"
+"ConnectToDatabase" -[#339933]-> "TableDataFletcher"
+"TableDataFletcher" -[#9966CC]-> "Database"
+"CreateStorageDatabase" -[#3366CC]-> "Database"
+"ProductData" -[#663399]-> "CreateStorageDatabase"
+
+"Order" -[#CCCC00]-> "Product"
+"Customer" -[#FF9933]-> "Order"
+
+"Inventory" --|> "Warehouse"
+"Warehouse" -[#666699]-> "Product"
+"Warehouse" -right[#666699]-> "Supplier"
+"Supplier" -[#33CC99]-> "Product"
+
+"OrderHandler" -[#FF6666]-> "Order"
+"ProductHandler" -[#CCCCFF]-> "Inventory"
+"ProductHandler" -[#CCCCFF]-> "Supplier"
+"ProductHandler" -[#CCCCFF]-> "Order"
+"Singleton" -[#66CC99]-> "ConnectToDatabase"
+"Singleton" -[#66CC99]-> "CreateStorageDatabase"
+"WarehouseUtils" -[#FFCC99]-> "Order"
+"WarehouseUtils" -[#FFCC99]-> "Warehouse"
+"Factory" -[#FFCC00]-> "ConnectToDatabase"
+"Factory" -[#FFCC00]-> "CreateStorageDatabase"
+"Factory" -[#FFCC00]-> "TableDataFletcher"
+"Factory" -[#FFCC00]-> "Inventory"
+"Factory" -[#FFCC00]-> "Order"
+"Factory" -[#FFCC00]-> "Product"
+"Factory" -[#FFCC00]-> "Supplier"
+"Factory" -[#FFCC00]-> "Warehouse"
+
+@enduml

@@ -1,0 +1,48 @@
+@startuml packages
+set namespaceSeparator none
+package "storageManagement" as storageManagement #77AADD {
+}
+package "storageManagement.main" as storageManagement.main #77AADD {
+}
+package "storageManagement.productCreationImp" as storageManagement.productCreationImp #99DDFF {
+}
+package "storageManagement.productCreationImp.sMS_product_implementation" as storageManagement.productCreationImp.sMS_product_implementation #99DDFF {
+}
+package "storageManagement.productDatabaseImp" as storageManagement.productDatabaseImp #44BB99 {
+}
+package "storageManagement.productDatabaseImp.sMS_connect_to_database" as storageManagement.productDatabaseImp.sMS_connect_to_database #44BB99 {
+}
+package "storageManagement.productDatabaseImp.sMS_create_new_storage_database" as storageManagement.productDatabaseImp.sMS_create_new_storage_database #44BB99 {
+}
+package "storageManagement.productDatabaseImp.sMS_data_for_database" as storageManagement.productDatabaseImp.sMS_data_for_database #44BB99 {
+}
+package "storageManagement.productDatabaseImp.sMS_get_data_from_table_in_database" as storageManagement.productDatabaseImp.sMS_get_data_from_table_in_database #44BB99 {
+}
+package "storageManagement.productSaleImp" as storageManagement.productSaleImp #BBCC33 {
+}
+package "storageManagement.productSaleImp.sMS_customer_implementation" as storageManagement.productSaleImp.sMS_customer_implementation #BBCC33 {
+}
+package "storageManagement.productSaleImp.sMS_order_implementation" as storageManagement.productSaleImp.sMS_order_implementation #BBCC33 {
+}
+package "storageManagement.productStorageImp" as storageManagement.productStorageImp #AAAA00 {
+}
+package "storageManagement.productStorageImp.sMS_product_inventory_implementation" as storageManagement.productStorageImp.sMS_product_inventory_implementation #AAAA00 {
+}
+package "storageManagement.productStorageImp.sMS_product_supplier_implementation" as storageManagement.productStorageImp.sMS_product_supplier_implementation #AAAA00 {
+}
+package "storageManagement.productStorageImp.sMS_product_warehouse_implementation" as storageManagement.productStorageImp.sMS_product_warehouse_implementation #AAAA00 {
+}
+package "storageManagement.productUtilsImp" as storageManagement.productUtilsImp #EEDD88 {
+}
+package "storageManagement.productUtilsImp.sMS_Iorder_handler_implementation" as storageManagement.productUtilsImp.sMS_Iorder_handler_implementation #EEDD88 {
+}
+package "storageManagement.productUtilsImp.sMS_Iproduct_handler_implementation" as storageManagement.productUtilsImp.sMS_Iproduct_handler_implementation #EEDD88 {
+}
+package "storageManagement.productUtilsImp.sMS_product_factory_implementation" as storageManagement.productUtilsImp.sMS_product_factory_implementation #EEDD88 {
+}
+package "storageManagement.productUtilsImp.sMS_product_warehouse_utils_implementation" as storageManagement.productUtilsImp.sMS_product_warehouse_utils_implementation #EEDD88 {
+}
+package "storageManagement.productUtilsImp.sMS_singleton_implementation" as storageManagement.productUtilsImp.sMS_singleton_implementation #EEDD88 {
+}
+storageManagement.main --> storageManagement.productUtilsImp.sMS_product_factory_implementation
+@enduml
