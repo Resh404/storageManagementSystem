@@ -73,3 +73,5 @@ if __name__ == '__main__':
         print(f"Customer {my_customer.name}'s order consists of the following products: ")
         my_customer.print_orders_placed()
         sys.exit()
+
+        "Testing stuff"
