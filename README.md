@@ -1,4 +1,4 @@
-# Storeage Management System (sMS) Project
+# Storage Management System (sMS) Project
 
 ## Description
 
@@ -9,7 +9,7 @@ while the reset of the modules are building blocks for storage manemgent system.
 ### Dependencies
 
 * Pycharm
-* Requirements.txt shows the libries used
+* Requirements.txt shows the libraries used
 * Windows 10
 * The structure of the project can be seen in the UML.png
 
