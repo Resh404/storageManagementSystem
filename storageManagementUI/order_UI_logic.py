@@ -65,6 +65,7 @@ class OrderChoices:
     def confirm_order(customer: Customer):
         if not customer.orders_placed.products:
             print("No products chosen")
+            print("Thank you for visiting. Goodbye!")
             return
 
         print("These are your products: ")

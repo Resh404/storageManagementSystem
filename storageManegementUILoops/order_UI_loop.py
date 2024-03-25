@@ -28,6 +28,7 @@ class OrderUILoop:
                 OrderChoices.confirm_order(customer)
                 return True
             elif order_choice == '5':
+                print("Thank you for visiting. Goodbye!")
                 sys.exit()
             else:
                 print("Invalid input")
