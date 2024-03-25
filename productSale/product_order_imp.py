@@ -29,7 +29,6 @@ class Order(ProductHandler):
         if the_product is not None and the_quantity >= product_quantity:
             self.product_names.append(product_name)
             self.product_quantities.append(product_quantity)
-            the_product.quantity = product_quantity
             self.products.append(the_product)
             return
         return None
@@ -59,9 +58,7 @@ class Order(ProductHandler):
                 self.reserved_products_list.append(reserved_product)
 
                 # Update the quantity of the product in the warehouse
-                product.quantity -= quantity
-                if product.quantity <= 0:
-                    self.warehouse.remove_product(product)
+                self.warehouse.update_product_details(product.id, quantity=(product.quantity-quantity))
             else:
                 print(f"Error: Insufficient quantity of product '{product_name}' in the warehouse.")
                 return False

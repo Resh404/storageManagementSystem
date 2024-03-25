@@ -9,14 +9,10 @@ from storageManagementDatabase.data_for_database import product_data
 
 @pytest.fixture
 def inventory_with_data() -> Inventory:
-    db_connection = ConnectToDatabase(host_name="localhost", user_name="root",
-                                      password="Kom12345", port=3306)
     inventory = Inventory()
-    table_data_fletcher = TableDataFletcher()
 
     # Get table data using TableDataFletcher
-    table_data = list(table_data_fletcher.get_table_data(
-        "products", db_connection.connect_to_database("storage_database")))
+    table_data = list(TableDataFletcher.get_table_data("products"))
 
     # Add products to inventory
     for row in table_data:

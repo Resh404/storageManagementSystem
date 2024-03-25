@@ -9,7 +9,7 @@ class WarehouseUILoop:
     @staticmethod
     def warehouse_options():
         while True:
-            print("1: Show all products\n"
+            print("\n1: Show all products\n"
                   "2: show products within a category\n"
                   "3: Exit")
             product_display = input("Enter your choice: ")
@@ -25,7 +25,7 @@ class WarehouseUILoop:
                     '4': "electronics"
                 }
 
-                print("Which category?")
+                print("\nWhich category?")
                 print("1: Food\n"
                       "2: Drink\n"
                       "3: Clothing\n"

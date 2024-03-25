@@ -9,23 +9,23 @@ from storageManagementUI.order_UI_logic import OrderChoices
 
 class OrderUILoop:
     @staticmethod
-    def order_options(customer: Customer, customer_order: Order):
+    def order_options(customer: Customer):
         while True:
-            print("1. Add a product to basket\n"
+            print("\n1. Add a product to basket\n"
                   "2. Remove a product from basket\n"
                   "3. Show products in basket\n"
                   "4. Confirm order\n"
                   "5. Exit")
-            order_choice = input("Enter your choice: ")
+            order_choice = input("Enter your choice:\n ")
 
             if order_choice == '1':
-                OrderChoices.add_product(customer_order)
+                OrderChoices.add_product(customer)
             elif order_choice == '2':
-                OrderChoices.remove_product(customer_order)
+                OrderChoices.remove_product(customer)
             elif order_choice == '3':
                 OrderChoices.show_customer_products(customer)
             elif order_choice == '4':
-                OrderChoices.confirm_order(customer, customer_order)
+                OrderChoices.confirm_order(customer)
                 return True
             elif order_choice == '5':
                 sys.exit()

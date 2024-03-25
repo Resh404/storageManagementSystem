@@ -9,8 +9,8 @@ class CustomerUILoop:
     @staticmethod
     def customer_options():
         while True:
-            print("If you are an existing customer please login else please register")
-            print("1: Login\n"
+            print("\nIf you are an existing customer please login else please register")
+            print("\n1: Login\n"
                   "2: Registration\n"
                   "3: Exit")
             customer_specification = input("Enter your choice: ")

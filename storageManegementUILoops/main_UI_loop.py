@@ -25,6 +25,6 @@ class UILoop:
         the_customer = SaleFactory.create_customer(*customer_info_in_database[:3], the_order)
 
         while True:
-            status = OrderUILoop.order_options(the_customer, the_order)
+            status = OrderUILoop.order_options(the_customer)
             if status:
                 break

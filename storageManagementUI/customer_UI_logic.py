@@ -13,12 +13,14 @@ class CustomerChoices:
         while True:
             print("Enter a username you would like: ")
             username = input().strip().lower()
+
             if not username:
                 print("Username cannot be empty")
                 continue
 
             print("Enter email: ")
             email = input().strip().lower()
+
             if not email:
                 print("Email cannot be empty")
                 continue
@@ -39,11 +41,13 @@ class CustomerChoices:
         while True:
             print("Enter email: ")
             email = input().strip().lower()
+
             if not email:
                 print("Email cannot be empty")
                 continue
 
             email_check = UtilsForUI.check_if_customer_exists(email)
+
             if email_check is not None:
                 print(f"Welcome {email_check[1]}")
                 return email

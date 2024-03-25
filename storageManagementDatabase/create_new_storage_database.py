@@ -31,6 +31,14 @@ class CreateStorageDatabase:
                 )
             """)
 
+            # Check if there is existing data in the products table
+            cursor.execute("SELECT COUNT(*) FROM products")
+            count = cursor.fetchone()[0]
+
+            if count > 0:
+                #print("Products table already contains data.")
+                return
+
             # Insert product data into the table
             insert_query = "INSERT INTO products (name, price, quantity, category) VALUES (%s, %s, %s, %s)"
             cursor.executemany(insert_query, product_data)
