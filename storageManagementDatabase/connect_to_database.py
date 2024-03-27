@@ -1,5 +1,7 @@
 from productUtils.singleton_imp import Singleton
 import mysql.connector
+import json
+
 
 ''' This class manages the manages the connection to the database.
 The class inherits from the Singleton to ensure that is only one connection at all times.
@@ -12,13 +14,14 @@ class ConnectToDatabase(Singleton):
     @staticmethod
     def _connect_to_server() -> mysql.connector:
         try:
+            # Read database configuration from JSON file
+            with open('config.json') as f:
+                config = json.load(f)
+                database_config = config.get('database', {})
+
             # Connect to the server
-            my_database = mysql.connector.connect(
-                host="localhost",
-                user="root",
-                password="Kom12345",
-                port=3306
-            )
+            my_database = mysql.connector.connect(**database_config)
+
             return my_database
         except mysql.connector.Error as e:
             print(f"Error connecting to the database: {e}")

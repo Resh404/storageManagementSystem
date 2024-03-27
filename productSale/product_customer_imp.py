@@ -30,7 +30,7 @@ class Customer(OrderHandler):
 
     def print_products_in_orders(self):
         total_cost = 0
-        for product in self.orders_placed.products:
-            print(f"{product.name}, Quantity: {product.quantity}, Price/ea: {product.price}")
-            total_cost += product.price * product.quantity
+        for product, quantity in zip(self.orders_placed.products, self.orders_placed.product_quantities):
+            print(f"{product.name}, Quantity: {quantity}, Price/ea: {product.price}")
+            total_cost += product.price * quantity
         print(f"Total cost: ${total_cost:.2f}")
